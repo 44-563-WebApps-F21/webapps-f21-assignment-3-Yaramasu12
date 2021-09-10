@@ -62,5 +62,42 @@
             <td> 80 </td>
         </tr>
     </table>
+    <hr>
+    <h3> </h3>
+    <p>The shortest path problem can be defined for graphs whether undirected, directed, or mixed. It is defined here for undirected graphs; for directed graphs the definition of path requires that consecutive vertices be<br> 
+        connected by an appropriate directed edge. Two vertices are adjacent when they are both incident to a common edge. A path in an undirected graph is a sequence of vertices {\displaystyle P=(v_{1},v_{2},\ldots ,<br>
+        v_{n})\in V\times V\times \cdots \times V}{\displaystyle P=(v_{1},v_{2},\ldots ,v_{n})\in V\times V\times \cdots \times V} such that {\displaystyle v_{i}}v_{i} is adjacent to {\displaystyle v_{i+1}}v_{i+1} for<br>
+        {\displaystyle 1\leq Such a path {\displaystyle P}P is called a path of length {\displaystyle n-1}n-1 from {\displaystyle v_{1}}v_{1} to {\displaystyle v_{n}}v_{n}. (The {\displaystyle v_{i}}v_{i} are variables; <br>
+        their numbering here relates to their position in the sequence and needs not to relate to any canonical labeling of the vertices.) <br> <a href="https://en.wikipedia.org/wiki/Shortest_path_problem"> Discription Link For Shortest Path</a>
+    </p>
+<pre>
+    const int INF = 1000000000;
+    vector<vector<pair<int, int>>> adj;
+    void dijkstra(int s, vector<int> & d, vector<int> & p) {
+    int n = adj.size();
+    d.assign(n, INF);
+    p.assign(n, -1);
+    vector<bool> u(n, false);
+    d[s] = 0;
+    for (int i = 0; i < n; i++) {
+    int v = -1;
+    for (int j = 0; j < n; j++) {
+    if (!u[j] && (v == -1 || d[j] < d[v]))
+        v = j;
+    }
+        if (d[v] == INF)
+            break;
+        u[v] = true;
+        for (auto edge : adj[v]) {
+        int to = edge.first;
+        int len = edge.second;
+        if (d[v] + len < d[to]) {
+            d[to] = d[v] + len;
+                p[to] = v;
+                    }
+                }
+            }
+        }
+    </pre>
 </body>
 </html>
